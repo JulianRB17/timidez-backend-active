@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const catchAsync = require('../utils/catchAsync');
+require('dotenv').config();
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -18,12 +18,12 @@ const userSchema = new mongoose.Schema({
     },
     required: true,
   },
-  webinar: {
+  webinarDate: {
     type: Date,
     required: true,
     default: new Date(process.env.WEBINAR_DATE),
   },
-  date: {
+  creationDate: {
     type: Date,
     required: true,
     default: Date.now(),

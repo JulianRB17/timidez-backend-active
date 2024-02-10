@@ -19,10 +19,10 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const { PORT = 3001, NODE_ENV, MONGOOSE_URL } = process.env;
+const { PORT = 3001, NODE_ENV } = process.env;
 const app = express();
 
-mongoose.connect(MONGOOSE_URL);
+mongoose.connect('mongodb://127.0.0.1:27017/timidez');
 app.use(helmet());
 
 app.use(express.json({ limit: '10kb' }));
@@ -40,7 +40,6 @@ app.get('/crash-test', () => {
 });
 
 app.use(limiter);
-// app.use('/api/public', cors(), express.static('public'));
 app.use('/api/users', usersRoute);
 
 app.use(errorLogger);
@@ -53,8 +52,6 @@ app.all('*', (req, res, next) => {
 app.use(globalErrorHandler);
 
 const server = app.listen(PORT, () => {
-  resetActiveUser();
-  sendResetMail();
   console.log(NODE_ENV, PORT);
 });
 
