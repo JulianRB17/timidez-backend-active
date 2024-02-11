@@ -19,7 +19,7 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const { PORT = 3001, NODE_ENV } = process.env;
+const { PORT = 3000, NODE_ENV } = process.env;
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/timidez');
@@ -30,6 +30,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
 app.use(mongoSanitize());
+// const whitelist = ['https://timidez.io', 'https://www.timidez.io']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+// app.use(cors({corsOptions}));
 app.use(cors());
 app.use(xss());
 
