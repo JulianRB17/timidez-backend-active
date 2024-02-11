@@ -30,18 +30,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
 app.use(mongoSanitize());
-// const whitelist = ['https://timidez.io', 'https://www.timidez.io']
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
-// app.use(cors({corsOptions}));
-app.use(cors());
+const whitelist = ['https://timidez.io', 'https://www.timidez.io'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors({ corsOptions }));
 app.use(xss());
 
 app.get('/crash-test', () => {
@@ -51,7 +50,7 @@ app.get('/crash-test', () => {
 });
 
 app.use(limiter);
-app.use('/api/users', usersRoute);
+app.use('/users', usersRoute);
 
 app.use(errorLogger);
 // app.use(errors());
