@@ -31,16 +31,16 @@ app.use(requestLogger);
 
 app.use(mongoSanitize());
 // const whitelist = ['https://timidez.io', 'https://www.timidez.io'];
-const whitelist = ['localhost'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+// };
+const corsOptions = { origin: 'localhost', optionsSuccessStatus: 200 };
 app.use(cors({ corsOptions }));
 app.use(xss());
 
