@@ -50,7 +50,7 @@ app.get('/crash-test', () => {
 });
 
 app.use(limiter);
-app.use('api/users', usersRoute);
+app.use('/users', usersRoute);
 
 app.use(errorLogger);
 // app.use(errors());
