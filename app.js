@@ -30,7 +30,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
 app.use(mongoSanitize());
-const whitelist = ['https://timidez.io', 'https://www.timidez.io'];
+// const whitelist = ['https://timidez.io', 'https://www.timidez.io'];
+const whitelist = ['localhost'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
