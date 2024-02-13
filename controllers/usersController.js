@@ -29,7 +29,7 @@ const createUser = catchAsync(async function (req, res, next) {
     // res.json({ user: newUser });
   }
   const contact = await activeCampaignApi.createContact(req.body);
-  res.json({ contact });
+  // res.json({ contact });
   if (!contact)
     next(
       new AppError(
