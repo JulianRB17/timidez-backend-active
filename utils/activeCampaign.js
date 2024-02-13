@@ -30,12 +30,14 @@ class ActiveCampaignApi {
   createContact(body) {
     const { email, username } = body;
     this._options.method = 'POST';
+    this.specificURL = 'contacts';
     this._options.body = JSON.stringify({
       contact: {
         email: email,
         firstName: username,
       },
     });
+    console.log(this);
     this._fetchData();
   }
 }
