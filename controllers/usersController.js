@@ -1,7 +1,6 @@
 const AppError = require('../utils/appError');
 
 const User = require('../models/user');
-// import activeCampaignApi from './../utils/activeCampaign';
 const activeCampaignApi = require('../utils/activeCampaign');
 require('dotenv').config();
 
@@ -29,14 +28,14 @@ const createUser = catchAsync(async function (req, res, next) {
     });
     res.json({ user: newUser });
   }
-  // const contact = await activeCampaignApi.createContact(req.body);
-  // if (!contact)
-  //   next(
-  //     new AppError(
-  //       'Algo pasó en el servidor, vuelve a intentarlo por favor',
-  //       500
-  //     )
-  //   );
+  const contact = await activeCampaignApi.createContact(req.body);
+  if (!contact)
+    next(
+      new AppError(
+        'Algo pasó en el servidor, vuelve a intentarlo por favor',
+        500
+      )
+    );
 });
 
 module.exports = {
