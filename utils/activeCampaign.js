@@ -27,8 +27,8 @@ class ActiveCampaignApi {
 
   //   https://pipedream.com/apps/activecampaign/integrations/mongodb
 
-  createContact(body) {
-    const { email, username } = body;
+  createContact(data) {
+    const { email, username } = data;
     this._options.method = 'POST';
     this.specificURL = 'contacts';
     this._options.body = JSON.stringify({
@@ -37,11 +37,23 @@ class ActiveCampaignApi {
         firstName: username,
       },
     });
-    console.log(this);
+    this._fetchData();
+  }
+
+  postContactToAList(data) {
+    const contactId = data.id;
+    this._options.method = 'POST';
+    this.specificURL = 'contactLists';
+    this._options.body = JSON.stringify({
+      contactList: {
+        list: process.env.LIST_ID,
+        contact: contactId,
+        status: 1,
+      },
+    });
     this._fetchData();
   }
 }
 
 const activeCampaignApi = new ActiveCampaignApi();
 module.exports = activeCampaignApi;
-// https://reconciliandometimidez.api-us1.com/api/3/contacts
