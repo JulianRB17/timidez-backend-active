@@ -12,7 +12,7 @@ const celebrateCreateUserMiddleware = function () {
   return celebrate({
     [Segments.BODY]: Joi.object().keys({
       email: Joi.string().required().custom(emailValidator),
-      username: Joi.string().required(),
+      firstName: Joi.string().required(),
     }),
   });
 };

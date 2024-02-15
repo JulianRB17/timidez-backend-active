@@ -3,7 +3,7 @@ const validator = require('validator');
 require('dotenv').config();
 
 const userSchema = new mongoose.Schema({
-  username: {
+  firstName: {
     type: String,
     maxlength: 30,
     required: true,
@@ -23,10 +23,25 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: new Date(process.env.WEBINAR_DATE),
   },
-  creationDate: {
+  cdate: {
     type: Date,
     required: true,
-    default: Date.now(),
+  },
+  udate: {
+    type: Date,
+    required: true,
+  },
+  links: {
+    type: Array,
+    required: true,
+  },
+  hash: {
+    type: String,
+    required: true,
+  },
+  id: {
+    type: String,
+    required: true,
   },
 });
 

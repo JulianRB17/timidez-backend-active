@@ -25,33 +25,49 @@ class ActiveCampaignApi {
       .catch((err) => console.error(err));
   }
 
-  //   https://pipedream.com/apps/activecampaign/integrations/mongodb
-
-  createContact(data) {
-    const { email, username } = data;
-    this._options.method = 'POST';
-    this.specificURL = 'contacts';
-    this._options.body = JSON.stringify({
-      contact: {
-        email: email,
-        firstName: username,
-      },
-    });
-    this._fetchData();
+  async createContact(data, next) {
+    try {
+      const { email, firstName } = data;
+      this._options.method = 'POST';
+      this.specificURL = 'contacts';
+      this._options.body = JSON.stringify({
+        contact: {
+          email: email,
+          firstName: firstName,
+        },
+      });
+      return await this._fetchData();
+    } catch (err) {
+      next(err);
+    }
   }
 
-  postContactToAList(data) {
-    const contactId = data.id;
-    this._options.method = 'POST';
-    this.specificURL = 'contactLists';
-    this._options.body = JSON.stringify({
-      contactList: {
-        list: process.env.LIST_ID,
-        contact: contactId,
-        status: 1,
-      },
-    });
-    this._fetchData();
+  async postContactToAList(contactId, next) {
+    try {
+      this._options.method = 'POST';
+      this.specificURL = 'contactLists';
+      this._options.body = JSON.stringify({
+        contactList: {
+          list: process.env.ACTIVE_CAMPAIGN_LIST_ID,
+          contact: contactId,
+          status: 1,
+        },
+      });
+      return await this._fetchData();
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getLists() {
+    try {
+      this._options.method = 'GET';
+      this.specificURL = 'lists';
+      this._options.body = null;
+      return await this._fetchData();
+    } catch (err) {
+      next(err);
+    }
   }
 }
 
