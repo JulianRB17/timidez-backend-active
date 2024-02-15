@@ -42,13 +42,13 @@ const createUser = catchAsync(async function (req, res, next) {
   }
 });
 
-const deleteUsers = catchAsync(async function (req, res, next) {
-  const deletedUsers = await User.deleteMany({});
-  res.json({ deletedUsers });
-});
+// const deleteUsers = catchAsync(async function (req, res, next) {
+//   const deletedUsers = await User.deleteMany({});
+//   res.json({ deletedUsers });
+// });
 
 module.exports = {
   createUser,
   getUsers,
-  deleteUsers,
+  // deleteUsers,
 };
