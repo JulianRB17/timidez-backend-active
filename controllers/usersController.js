@@ -1,8 +1,6 @@
 const AppError = require('../utils/appError');
-
 const User = require('../models/user');
 const activeCampaignApi = require('../utils/activeCampaign');
-require('dotenv').config();
 
 const catchAsync = require('./../utils/catchAsync');
 

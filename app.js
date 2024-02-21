@@ -10,6 +10,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const { usersRoute } = require('./routes/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./middlewares/rateLimit');
+const { dataRoute } = require('./routes/data');
 require('dotenv').config();
 
 process.on('uncaughtException', (err) => {
@@ -43,6 +44,7 @@ app.get('/crash-test', () => {
 
 app.use(limiter);
 app.use('/users', usersRoute);
+app.use('/data', dataRoute);
 
 app.use(errorLogger);
 // app.use(errors());
