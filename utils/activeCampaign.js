@@ -59,6 +59,23 @@ class ActiveCampaignApi {
     }
   }
 
+  async postContactToMasterList(contactId, next) {
+    try {
+      this._options.method = 'POST';
+      this.specificURL = 'contactLists';
+      this._options.body = JSON.stringify({
+        contactList: {
+          list: 1,
+          contact: contactId,
+          status: 1,
+        },
+      });
+      return await this._fetchData();
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async getLists() {
     try {
       this._options.method = 'GET';

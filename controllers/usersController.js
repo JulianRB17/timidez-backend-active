@@ -35,6 +35,10 @@ const createUser = catchAsync(async function (req, res, next) {
       hash,
       id,
     });
+    const masterList = await activeCampaignApi.postContactToMasterList(
+      id,
+      next
+    );
     const updatedList = await activeCampaignApi.postContactToAList(id, next);
     res.json(updatedList);
   }
