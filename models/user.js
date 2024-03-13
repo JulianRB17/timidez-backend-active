@@ -20,28 +20,28 @@ const userSchema = new mongoose.Schema({
   },
   webinarDate: {
     type: Date,
-    required: true,
+    // required: true,
     default: new Date(process.env.WEBINAR_DATE),
   },
   cdate: {
     type: Date,
-    required: true,
+    // required: true,
   },
   udate: {
     type: Date,
-    required: true,
+    // required: true,
   },
   links: {
     type: Array,
-    required: true,
+    // required: true,
   },
   hash: {
     type: String,
-    required: true,
+    // required: true,
   },
   id: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 

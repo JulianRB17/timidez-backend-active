@@ -4,16 +4,17 @@ const activeCampaignApi = require('../utils/activeCampaign');
 
 const catchAsync = require('./../utils/catchAsync');
 
-// const getUsers = catchAsync(async function (req, res, next) {
-//   const users = await User.find({});
-//   res.json({
-//     length: users.length,
-//     users: users,
-//   });
-// });
+const getUsers = catchAsync(async function (req, res, next) {
+  const users = await User.find({});
+  res.json({
+    length: users.length,
+    users: users,
+  });
+});
 
 const createUser = catchAsync(async function (req, res, next) {
   const { firstName, email } = req.body;
+
   const user = await User.find({ email: email });
   if (user[0]) {
     const updatedList = await activeCampaignApi.postContactToAList(
@@ -44,13 +45,13 @@ const createUser = catchAsync(async function (req, res, next) {
   }
 });
 
-// const deleteUsers = catchAsync(async function (req, res, next) {
-//   const deletedUsers = await User.deleteMany({});
-//   res.json({ deletedUsers });
-// });
+const deleteUsers = catchAsync(async function (req, res, next) {
+  const deletedUsers = await User.deleteOne({ email: req.params.email });
+  res.json({ deletedUsers });
+});
 
 module.exports = {
   createUser,
-  // getUsers,
-  // deleteUsers,
+  getUsers,
+  deleteUsers,
 };
