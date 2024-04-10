@@ -4,11 +4,11 @@ const { celebrateCreateUserMiddleware } = require('../middlewares/celebrate');
 const {
   createUser,
   // getUsers,
-  // deleteUsers,
+  deleteUsers,
 } = require('../controllers/usersController');
 
 // usersRoute.get('/', getUsers);
 usersRoute.post('/', celebrateCreateUserMiddleware(), createUser);
-// usersRoute.delete('/:email', deleteUsers);
+usersRoute.delete('/:email', deleteUsers);
 
 module.exports = { usersRoute };

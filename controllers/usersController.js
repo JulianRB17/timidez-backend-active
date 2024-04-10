@@ -13,6 +13,7 @@ const getUsers = catchAsync(async function (req, res, next) {
 });
 
 const createUser = catchAsync(async function (req, res, next) {
+  console.log(req.body);
   const { firstName, email } = req.body;
 
   const user = await User.find({ email: email });
@@ -26,7 +27,6 @@ const createUser = catchAsync(async function (req, res, next) {
   if (!user[0]) {
     const contact = await activeCampaignApi.createContact(req.body, next);
     const { cdate, udate, links, hash, id } = contact.contact;
-
     const newUser = await User.create({
       email,
       firstName,
